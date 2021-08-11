@@ -38,14 +38,16 @@ public abstract class IntegrationTestBase {
         @Override
         public void initialize(ConfigurableApplicationContext configurableApplicationContext) {
             TestPropertyValues
-                    .of("kafka.bootstrap-servers=" + kafka.getEmbeddedKafka().getBrokersAsString(),
+                    .of(
+                            "kafka.bootstrap-servers=" + kafka.getEmbeddedKafka().getBrokersAsString(),
                             "kafka.consumer.topic=" + OPERATION_LOG_TOPIC,
                             "spring.datasource.url=" + postgres.getJdbcUrl(),
                             "spring.datasource.username=" + postgres.getUsername(),
                             "spring.datasource.password=" + postgres.getPassword(),
                             "spring.flyway.url=" + postgres.getJdbcUrl(),
                             "spring.flyway.user=" + postgres.getUsername(),
-                            "spring.flyway.password=" + postgres.getPassword())
+                            "spring.flyway.password=" + postgres.getPassword()
+                    )
                     .applyTo(configurableApplicationContext.getEnvironment());
         }
     }

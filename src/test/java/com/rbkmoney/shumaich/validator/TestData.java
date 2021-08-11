@@ -24,7 +24,12 @@ public class TestData {
     public static final Long KAFKA_EARLY_OFFSET = 0L;
     public static final Long KAFKA_FAR_OFFSET = 1000L;
 
-    public static OperationLog operationLog(Long accountId, String plan, Long batch, Long batchHash, com.rbkmoney.damsel.shumaich.OperationType operationType) {
+    public static OperationLog operationLog(
+            Long accountId,
+            String plan,
+            Long batch,
+            Long batchHash,
+            com.rbkmoney.damsel.shumaich.OperationType operationType) {
         OperationLog operationLog = new OperationLog()
                 .setAccount(new com.rbkmoney.damsel.shumaich.Account(accountId, "RUB"))
                 .setPlanId(plan)
@@ -57,7 +62,13 @@ public class TestData {
                 .build();
     }
 
-    public static OperationRecord operationRecord(Long accountId, String planId, Long batchId, Long batchHash, OperationType operationType, Long offset) {
+    public static OperationRecord operationRecord(
+            Long accountId,
+            String planId,
+            Long batchId,
+            Long batchHash,
+            OperationType operationType,
+            Long offset) {
         return new OperationRecord(new RecordId(planId, batchId, accountId), operationType, batchHash, offset);
     }
 

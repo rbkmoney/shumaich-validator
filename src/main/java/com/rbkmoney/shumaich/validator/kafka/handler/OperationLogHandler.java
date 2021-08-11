@@ -33,7 +33,8 @@ public class OperationLogHandler {
                 .map(LogWithOffset::new)
                 .collect(Collectors.groupingBy(RecordId::new));
 
-        List<OperationRecord> operationRecordsInDb = operationRecordRepo.findAllById(operationLogsGroupedByRecordId.keySet());
+        List<OperationRecord> operationRecordsInDb =
+                operationRecordRepo.findAllById(operationLogsGroupedByRecordId.keySet());
 
         ImmutableTable<RecordId, OperationType, List<LogWithOffset>> recordIdOperationTypeTable = messages.stream()
                 .map(LogWithOffset::new)
@@ -41,7 +42,8 @@ public class OperationLogHandler {
                         RecordId::new,
                         LogWithOffset::getOperationType,
                         Arrays::asList,
-                        (a, b) -> Streams.concat(a.stream(), b.stream()).collect(Collectors.toList())));
+                        (a, b) -> Streams.concat(a.stream(), b.stream()).collect(Collectors.toList())
+                ));
 
         List<FailureRecord> failureRecordsToSave = new ArrayList<>();
         List<OperationRecord> dbRecordsToSave = new ArrayList<>();
@@ -50,16 +52,20 @@ public class OperationLogHandler {
 
             List<OperationRecord> dbRecords = filterOperationRecordByRecordId(operationRecordsInDb, recordId);
 
-            final List<LogWithOffset> holds = filterProcessedLogs(recordIdOperationTypeTable.get(recordId, HOLD), dbRecords);
-            final List<LogWithOffset> commits = filterProcessedLogs(recordIdOperationTypeTable.get(recordId, COMMIT), dbRecords);
-            final List<LogWithOffset> rollbacks = filterProcessedLogs(recordIdOperationTypeTable.get(recordId, ROLLBACK), dbRecords);
+            final List<LogWithOffset> holds =
+                    filterProcessedLogs(recordIdOperationTypeTable.get(recordId, HOLD), dbRecords);
+            final List<LogWithOffset> commits =
+                    filterProcessedLogs(recordIdOperationTypeTable.get(recordId, COMMIT), dbRecords);
+            final List<LogWithOffset> rollbacks =
+                    filterProcessedLogs(recordIdOperationTypeTable.get(recordId, ROLLBACK), dbRecords);
 
             processHolds(recordId, holds, dbRecords, failureRecordsToSave);
             processFinalOps(recordId, commits, dbRecords, failureRecordsToSave);
             processFinalOps(recordId, rollbacks, dbRecords, failureRecordsToSave);
 
-            if (commits != null && rollbacks != null &&
-                    (!commits.isEmpty() && !rollbacks.isEmpty())) {
+            if (commits != null
+                    && rollbacks != null
+                    && (!commits.isEmpty() && !rollbacks.isEmpty())) {
                 failureRecordsToSave.add(getFailureRecord(recordId, FailureReason.FINAL_OPERATIONS_MIXED));
             }
             dbRecordsToSave.addAll(dbRecords);
@@ -68,7 +74,11 @@ public class OperationLogHandler {
         recordDao.save(dbRecordsToSave, failureRecordsToSave);
     }
 
-    private void processHolds(RecordId recordId, List<LogWithOffset> holds, List<OperationRecord> dbRecords, List<FailureRecord> failureRecords) {
+    private void processHolds(
+            RecordId recordId,
+            List<LogWithOffset> holds,
+            List<OperationRecord> dbRecords,
+            List<FailureRecord> failureRecords) {
         if (holds == null || holds.isEmpty()) {
             return;
         }
@@ -78,7 +88,8 @@ public class OperationLogHandler {
                 dbRecords.add(getOperationRecord(holds));
             } else {
                 failureRecords.add(getFailureRecord(recordId, FailureReason.DIFFERENT_OPERATION_ALREADY_EXISTS));
-                dbRecords.add(getOperationRecord(List.of(holds.get(0)))); // we had an empty base, but there 2 different holds. So write 1 of them.
+                dbRecords.add(getOperationRecord(List.of(holds.get(0)))); // we had an empty base, but there 2
+                // different holds. So write 1 of them.
             }
         }
 
@@ -91,7 +102,11 @@ public class OperationLogHandler {
         }
     }
 
-    private void processFinalOps(RecordId recordId, List<LogWithOffset> finalOps, List<OperationRecord> dbRecords, List<FailureRecord> failureRecords) {
+    private void processFinalOps(
+            RecordId recordId,
+            List<LogWithOffset> finalOps,
+            List<OperationRecord> dbRecords,
+            List<FailureRecord> failureRecords) {
         if (finalOps == null || finalOps.isEmpty()) {
             return;
         }
@@ -126,7 +141,12 @@ public class OperationLogHandler {
 
     private OperationRecord getOperationRecord(List<LogWithOffset> holdsForRecordId) {
         final RecordId recordId = holdsForRecordId.stream().map(RecordId::new).findFirst().orElseThrow();
-        return new OperationRecord(recordId, HOLD, holdsForRecordId.get(0).getBatchHash(), getMaxOffset(holdsForRecordId));
+        return new OperationRecord(
+                recordId,
+                HOLD,
+                holdsForRecordId.get(0).getBatchHash(),
+                getMaxOffset(holdsForRecordId)
+        );
     }
 
     private Long getMaxOffset(List<LogWithOffset> holdsForRecordId) {

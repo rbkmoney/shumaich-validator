@@ -10,6 +10,10 @@ management:
         enabled: false
         flavor: etsy
   endpoint.health.show-details: always
+  endpoints:
+    web:
+      exposure:
+        include: info, health
 spring:
   application:
     name: '@project.name@'

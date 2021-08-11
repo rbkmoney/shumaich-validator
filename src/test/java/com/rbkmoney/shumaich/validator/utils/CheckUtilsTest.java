@@ -13,15 +13,23 @@ public class CheckUtilsTest {
 
     @Test
     public void checksumTests() {
-        final List<LogWithOffset> logsConsistent = List.of(TestData.logWithOffset(1L),
-                TestData.logWithOffset(1L));
-        final List<LogWithOffset> logsInconsistent = List.of(TestData.logWithOffset(1L),
-                TestData.logWithOffset(2L));
+        final List<LogWithOffset> logsConsistent = List.of(
+                TestData.logWithOffset(1L),
+                TestData.logWithOffset(1L)
+        );
+        final List<LogWithOffset> logsInconsistent = List.of(
+                TestData.logWithOffset(1L),
+                TestData.logWithOffset(2L)
+        );
 
-        final List<OperationRecord> recordsConsistent = List.of(TestData.operationRecord(1L),
-                TestData.operationRecord(1L));
-        final List<OperationRecord> recordsInconsistent = List.of(TestData.operationRecord(1L),
-                TestData.operationRecord(2L));
+        final List<OperationRecord> recordsConsistent = List.of(
+                TestData.operationRecord(1L),
+                TestData.operationRecord(1L)
+        );
+        final List<OperationRecord> recordsInconsistent = List.of(
+                TestData.operationRecord(1L),
+                TestData.operationRecord(2L)
+        );
 
         Assert.assertTrue(CheckUtils.checksumConsistent(logsConsistent));
         Assert.assertFalse(CheckUtils.checksumConsistent(logsInconsistent));
@@ -35,8 +43,10 @@ public class CheckUtilsTest {
 
     @Test
     public void mixedOpsTest() {
-        final List<LogWithOffset> commitLogs = List.of(TestData.logWithOffset(OperationType.COMMIT),
-                TestData.logWithOffset(OperationType.COMMIT));
+        final List<LogWithOffset> commitLogs = List.of(
+                TestData.logWithOffset(OperationType.COMMIT),
+                TestData.logWithOffset(OperationType.COMMIT)
+        );
         final List<LogWithOffset> rollbackLogs = List.of(TestData.logWithOffset(OperationType.ROLLBACK));
 
         final List<OperationRecord> commitsRecords = List.of(TestData.operationRecord(OperationType.COMMIT));
@@ -51,14 +61,20 @@ public class CheckUtilsTest {
 
     @Test
     public void containsTest() {
-        final List<OperationRecord> holds = List.of(TestData.operationRecord(OperationType.HOLD),
-                TestData.operationRecord(OperationType.HOLD));
+        final List<OperationRecord> holds = List.of(
+                TestData.operationRecord(OperationType.HOLD),
+                TestData.operationRecord(OperationType.HOLD)
+        );
 
-        final List<OperationRecord> commits = List.of(TestData.operationRecord(OperationType.COMMIT),
-                TestData.operationRecord(OperationType.COMMIT));
+        final List<OperationRecord> commits = List.of(
+                TestData.operationRecord(OperationType.COMMIT),
+                TestData.operationRecord(OperationType.COMMIT)
+        );
 
-        final List<OperationRecord> mixed = List.of(TestData.operationRecord(OperationType.HOLD),
-                TestData.operationRecord(OperationType.COMMIT));
+        final List<OperationRecord> mixed = List.of(
+                TestData.operationRecord(OperationType.HOLD),
+                TestData.operationRecord(OperationType.COMMIT)
+        );
 
 
         Assert.assertTrue(CheckUtils.containsFinalOp(commits));

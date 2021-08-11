@@ -24,9 +24,12 @@ public class LogWithOffset {
         this.planId = operationLog.getPlanId();
         this.batchId = operationLog.getBatchId();
         this.operationType = convertOperationType(operationLog.getOperationType());
-        this.account = new Account(operationLog.getAccount().getId(), operationLog.getAccount().getCurrencySymbolicCode());
+        this.account =
+                new Account(operationLog.getAccount().getId(), operationLog.getAccount().getCurrencySymbolicCode());
         this.batchHash = operationLog.getBatchHash();
-        this.validationError = operationLog.getValidationError() != null ? convertValidationError(operationLog.getValidationError()) : null;
+        this.validationError = operationLog.getValidationError() != null
+                ? convertValidationError(operationLog.getValidationError())
+                : null;
         this.kafkaOffset = consumerRecord.offset();
     }
 

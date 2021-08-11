@@ -109,7 +109,10 @@ public class ShumaichValidatorIntegrationTest extends IntegrationTestBase {
         await().untilAsserted(() -> {
             final List<OperationRecord> records = operationRecordRepo.findAll();
             assertEquals(1, records.size());
-            assertEquals(com.rbkmoney.shumaich.validator.domain.OperationType.COMMIT, records.get(0).getOperationType());
+            assertEquals(
+                    com.rbkmoney.shumaich.validator.domain.OperationType.COMMIT,
+                    records.get(0).getOperationType()
+            );
         });
 
     }
@@ -126,7 +129,10 @@ public class ShumaichValidatorIntegrationTest extends IntegrationTestBase {
         await().untilAsserted(() -> {
             final List<OperationRecord> records = operationRecordRepo.findAll();
             assertEquals(1, records.size());
-            assertEquals(com.rbkmoney.shumaich.validator.domain.OperationType.COMMIT, records.get(0).getOperationType());
+            assertEquals(
+                    com.rbkmoney.shumaich.validator.domain.OperationType.COMMIT,
+                    records.get(0).getOperationType()
+            );
 
             final List<FailureRecord> failedRecords = failureRecordRepo.findAll();
             assertEquals(1, failedRecords.size());
@@ -201,7 +207,10 @@ public class ShumaichValidatorIntegrationTest extends IntegrationTestBase {
         await().untilAsserted(() -> {
             final List<OperationRecord> records = operationRecordRepo.findAll();
             assertEquals(1, records.size());
-            assertEquals(com.rbkmoney.shumaich.validator.domain.OperationType.ROLLBACK, records.get(0).getOperationType());
+            assertEquals(
+                    com.rbkmoney.shumaich.validator.domain.OperationType.ROLLBACK,
+                    records.get(0).getOperationType()
+            );
             assertEquals(HASH_1, records.get(0).getBatchHash());
         });
     }
@@ -236,7 +245,10 @@ public class ShumaichValidatorIntegrationTest extends IntegrationTestBase {
         await().untilAsserted(() -> {
             final List<OperationRecord> records = operationRecordRepo.findAll();
             assertEquals(1, records.size());
-            assertEquals(com.rbkmoney.shumaich.validator.domain.OperationType.COMMIT, records.get(0).getOperationType());
+            assertEquals(
+                    com.rbkmoney.shumaich.validator.domain.OperationType.COMMIT,
+                    records.get(0).getOperationType()
+            );
             assertEquals(HASH_1, records.get(0).getBatchHash());
 
             final List<FailureRecord> failedRecords = failureRecordRepo.findAll();
@@ -256,7 +268,10 @@ public class ShumaichValidatorIntegrationTest extends IntegrationTestBase {
         await().untilAsserted(() -> {
             final List<OperationRecord> records = operationRecordRepo.findAll();
             assertEquals(1, records.size());
-            assertEquals(com.rbkmoney.shumaich.validator.domain.OperationType.COMMIT, records.get(0).getOperationType());
+            assertEquals(
+                    com.rbkmoney.shumaich.validator.domain.OperationType.COMMIT,
+                    records.get(0).getOperationType()
+            );
             assertEquals(HASH_1, records.get(0).getBatchHash());
         });
     }
@@ -271,7 +286,10 @@ public class ShumaichValidatorIntegrationTest extends IntegrationTestBase {
         await().untilAsserted(() -> {
             final List<OperationRecord> records = operationRecordRepo.findAll();
             assertEquals(1, records.size());
-            assertEquals(com.rbkmoney.shumaich.validator.domain.OperationType.COMMIT, records.get(0).getOperationType());
+            assertEquals(
+                    com.rbkmoney.shumaich.validator.domain.OperationType.COMMIT,
+                    records.get(0).getOperationType()
+            );
             assertEquals(HASH_1, records.get(0).getBatchHash());
 
             final List<FailureRecord> failedRecords = failureRecordRepo.findAll();
@@ -291,7 +309,10 @@ public class ShumaichValidatorIntegrationTest extends IntegrationTestBase {
         await().untilAsserted(() -> {
             final List<OperationRecord> records = operationRecordRepo.findAll();
             assertEquals(1, records.size());
-            assertEquals(com.rbkmoney.shumaich.validator.domain.OperationType.COMMIT, records.get(0).getOperationType());
+            assertEquals(
+                    com.rbkmoney.shumaich.validator.domain.OperationType.COMMIT,
+                    records.get(0).getOperationType()
+            );
             assertEquals(HASH_1, records.get(0).getBatchHash());
 
             final List<FailureRecord> failedRecords = failureRecordRepo.findAll();
@@ -313,7 +334,10 @@ public class ShumaichValidatorIntegrationTest extends IntegrationTestBase {
         await().untilAsserted(() -> {
             final List<OperationRecord> records = operationRecordRepo.findAll();
             assertEquals(1, records.size());
-            assertEquals(com.rbkmoney.shumaich.validator.domain.OperationType.COMMIT, records.get(0).getOperationType());
+            assertEquals(
+                    com.rbkmoney.shumaich.validator.domain.OperationType.COMMIT,
+                    records.get(0).getOperationType()
+            );
             assertEquals(HASH_1, records.get(0).getBatchHash());
 
             final List<FailureRecord> failedRecords = failureRecordRepo.findAll();
@@ -335,8 +359,14 @@ public class ShumaichValidatorIntegrationTest extends IntegrationTestBase {
         await().untilAsserted(() -> {
             final List<OperationRecord> records = operationRecordRepo.findAll();
             assertEquals(2, records.size());
-            assertEquals(com.rbkmoney.shumaich.validator.domain.OperationType.COMMIT, records.get(0).getOperationType());
-            assertEquals(com.rbkmoney.shumaich.validator.domain.OperationType.COMMIT, records.get(1).getOperationType());
+            assertEquals(
+                    com.rbkmoney.shumaich.validator.domain.OperationType.COMMIT,
+                    records.get(0).getOperationType()
+            );
+            assertEquals(
+                    com.rbkmoney.shumaich.validator.domain.OperationType.COMMIT,
+                    records.get(1).getOperationType()
+            );
 
             final List<FailureRecord> failedRecords = failureRecordRepo.findAll();
             assertEquals(0, failedRecords.size());
@@ -355,8 +385,14 @@ public class ShumaichValidatorIntegrationTest extends IntegrationTestBase {
         await().untilAsserted(() -> {
             final List<OperationRecord> records = operationRecordRepo.findAll();
             assertEquals(2, records.size());
-            assertEquals(com.rbkmoney.shumaich.validator.domain.OperationType.COMMIT, records.get(0).getOperationType());
-            assertEquals(com.rbkmoney.shumaich.validator.domain.OperationType.COMMIT, records.get(1).getOperationType());
+            assertEquals(
+                    com.rbkmoney.shumaich.validator.domain.OperationType.COMMIT,
+                    records.get(0).getOperationType()
+            );
+            assertEquals(
+                    com.rbkmoney.shumaich.validator.domain.OperationType.COMMIT,
+                    records.get(1).getOperationType()
+            );
 
             final List<FailureRecord> failedRecords = failureRecordRepo.findAll();
             assertEquals(0, failedRecords.size());
@@ -365,7 +401,14 @@ public class ShumaichValidatorIntegrationTest extends IntegrationTestBase {
 
     @Test
     public void offsetAlreadyRead() {
-        givenDb(PLAN_1, BATCH_1, ACCOUNT_1, HASH_1, com.rbkmoney.shumaich.validator.domain.OperationType.COMMIT, KAFKA_FAR_OFFSET);
+        givenDb(
+                PLAN_1,
+                BATCH_1,
+                ACCOUNT_1,
+                HASH_1,
+                com.rbkmoney.shumaich.validator.domain.OperationType.COMMIT,
+                KAFKA_FAR_OFFSET
+        );
         given(PLAN_1, BATCH_1, ACCOUNT_1, HASH_1, OperationType.HOLD);
         given(PLAN_1, BATCH_1, ACCOUNT_1, HASH_1, OperationType.COMMIT);
 
@@ -373,7 +416,10 @@ public class ShumaichValidatorIntegrationTest extends IntegrationTestBase {
         await().untilAsserted(() -> {
             final List<OperationRecord> records = operationRecordRepo.findAll();
             assertEquals(1, records.size());
-            assertEquals(com.rbkmoney.shumaich.validator.domain.OperationType.COMMIT, records.get(0).getOperationType());
+            assertEquals(
+                    com.rbkmoney.shumaich.validator.domain.OperationType.COMMIT,
+                    records.get(0).getOperationType()
+            );
             assertEquals(KAFKA_FAR_OFFSET, records.get(0).getKafkaOffset());
 
             final List<FailureRecord> failedRecords = failureRecordRepo.findAll();
@@ -394,11 +440,29 @@ public class ShumaichValidatorIntegrationTest extends IntegrationTestBase {
 
     }
 
-    private void givenDb(String plan, Long batch, Long account, Long batchHash, com.rbkmoney.shumaich.validator.domain.OperationType operationType) {
-        operationRecordRepo.save(TestData.operationRecord(account, plan, batch, batchHash, operationType, KAFKA_EARLY_OFFSET));
+    private void givenDb(
+            String plan,
+            Long batch,
+            Long account,
+            Long batchHash,
+            com.rbkmoney.shumaich.validator.domain.OperationType operationType) {
+        operationRecordRepo.save(TestData.operationRecord(
+                account,
+                plan,
+                batch,
+                batchHash,
+                operationType,
+                KAFKA_EARLY_OFFSET
+        ));
     }
 
-    private void givenDb(String plan, Long batch, Long account, Long batchHash, com.rbkmoney.shumaich.validator.domain.OperationType operationType, Long offset) {
+    private void givenDb(
+            String plan,
+            Long batch,
+            Long account,
+            Long batchHash,
+            com.rbkmoney.shumaich.validator.domain.OperationType operationType,
+            Long offset) {
         operationRecordRepo.save(TestData.operationRecord(account, plan, batch, batchHash, operationType, offset));
     }
 

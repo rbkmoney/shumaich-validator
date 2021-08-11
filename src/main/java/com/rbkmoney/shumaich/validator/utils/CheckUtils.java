@@ -12,15 +12,15 @@ import static com.rbkmoney.shumaich.validator.domain.OperationType.HOLD;
 
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class CheckUtils {
-    
+
     public static boolean finalOperationsMixed(List<OperationRecord> operationRecords, List<LogWithOffset> finalOps) {
         return Stream.concat(
                 finalOps.stream().map(LogWithOffset::getOperationType),
                 operationRecords.stream().map(OperationRecord::getOperationType)
         )
-                .filter(operationType -> !operationType.equals(HOLD))
-                .distinct()
-                .count() == 2;
+                       .filter(operationType -> !operationType.equals(HOLD))
+                       .distinct()
+                       .count() == 2;
     }
 
     public static boolean containsFinalOp(List<OperationRecord> dbRecords) {
@@ -41,6 +41,6 @@ public class CheckUtils {
                 records.stream().map(OperationRecord::getBatchHash)
         ).distinct().count() == 1;
     }
-    
-    
+
+
 }

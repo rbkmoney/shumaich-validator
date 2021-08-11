@@ -12,10 +12,12 @@ public class FilterUtilsTest {
 
     @Test
     public void operationRecordsFiltered() {
-        final List<OperationRecord> operationRecords = List.of(TestData.operationRecord(1L, "plan1", 1L),
+        final List<OperationRecord> operationRecords = List.of(
+                TestData.operationRecord(1L, "plan1", 1L),
                 TestData.operationRecord(1L, "plan1", 2L),
                 TestData.operationRecord(2L, "plan1", 1L),
-                TestData.operationRecord(1L, "plan2", 1L));
+                TestData.operationRecord(1L, "plan2", 1L)
+        );
 
         Assert.assertEquals(
                 1,
